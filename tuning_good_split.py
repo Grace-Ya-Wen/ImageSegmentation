@@ -15,6 +15,7 @@ from PIL import Image,ImageFilter,ImageDraw,ImageEnhance, ImageChops
 from numpy.random import seed
 from model_3 import *
 from data_1 import *
+from tuning import *
 import sklearn
 from keras.wrappers.scikit_learn import KerasClassifier
 from keras.callbacks import History
