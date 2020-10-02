@@ -33,36 +33,13 @@ from sklearn.model_selection import cross_val_score
 
 
 # training data
-files = glob.glob ("data/membrane/train/train_raw/*.tif") 
-x_train = np.ndarray((len(files),128,128,3), dtype=np.uint8)
-
-files.sort(key=lambda x: int(x.split('/')[4][:-4]))
-for i,myFile in enumerate (files):
-    image = cv2.imread (myFile,cv2.IMREAD_COLOR)
-    image = np.asarray(image, dtype="int32" )
-    norm = (image - np.min(image)) / (np.max(image) - np.min(image))
-    x_train[i] = image
-
-# training mask data
-files = glob.glob ("data/membrane/train/train_label/*.tif")
-y_train = np.ndarray((len(files),128,128,1), dtype=np.uint8)
-files.sort(key=lambda x: int(x.split('/')[4][:-4]))
-for i,myFile in enumerate (files):
-    image = cv2.imread (myFile)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = np.asarray(image, dtype="int32" )
-    image = image.reshape(image.shape+(1,))
-    norm = image/255
-    y_train[i] = norm
-
 x, y = get_image_array('data/membrane/train/image','data/membrane/train/label', image_as_gray = False,mask_as_gray = True)
 train_img, train_mask = image_processing(x, y, target_size = (128, 128), augmentation = True, padding = True)
 
 # fitting parameter
-reduceLR = ReduceLROnPlateau(factor=0.05, patience=3, min_lr=0.00001, verbose=1)
+#reduceLR = ReduceLROnPlateau(factor=0.05, patience=3, min_lr=0.00001, verbose=1)
 model_checkpoint = ModelCheckpoint('test.hdf5', monitor='loss',verbose=1, save_best_only=True)
-#earlystop = EarlyStopping(patience=8, verbose=1)
-earlystop = EarlyStopping(monitor='loss', mode='min', verbose=1, patience=10)
+earlystop = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
 
 # model fit
 input_img = Input((128, 128, 3), name='img')
