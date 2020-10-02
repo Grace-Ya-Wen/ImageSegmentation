@@ -21,7 +21,7 @@ from keras.callbacks import History
 from matplotlib import pyplot as plt
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 import sys
-from sklearn.model_selection import KFold, StratifiedKFold
+from sklearn.model_selection import KFold, StratifiedKFold,train_test_split
 
 
 # K-fold Cross Validation model evaluation
