@@ -83,7 +83,11 @@ for train, test in kfold.split(x, y):
     acc_per_fold.append(scores[1])
     loss_per_fold.append(scores[0])
 
-
+# == Provide average scores ==
+print('------------------------------------------------------------------------')
+print('Best set of hyperparameter for each fold')
 print(parameter_set)
+print('Accuracy for model trained by each best set of hyperparameter')
 print(acc_per_fold)
+print('Loss for model trained by each best set of hyperparameter')
 print(loss_per_fold)
