@@ -30,7 +30,6 @@ def compute_iou(y_pred, y_true):
     IoU = intersection / union.astype(np.float32)
     return np.mean(IoU)
 
-
 def sensitivity(y_pred, y_true):
     # ytrue, ypred is a flatten vector
     y_pred = np.rint(y_pred.flatten())
@@ -58,7 +57,6 @@ def accuracy(predict,truth):
     return acc
 
 def DSC(predict, truth):
-
     smooth = 1 
     #y_true_f = K.flatten(truth) # flatten to 1D
     #y_pred_f = K.flatten(predict)
@@ -67,7 +65,6 @@ def DSC(predict, truth):
     #intersection = K.sum(y_true_f * y_pred_f)
     dice = K.mean((2. * intersection + smooth)/(union + smooth), axis=0)
     return dice
-
 
 def IoU(predict, truth):
     w, h = predict.shape
@@ -82,18 +79,19 @@ def IoU(predict, truth):
                 union+=1
     return inter/union
 
-
+# store the images of prediction
 predict_files = glob.glob ("you_path_stored_the_prediction")
-
 predict = np.ndarray((len(predict_files),100,100), dtype=np.uint8)
 for i,myFile in enumerate (predict_files):
     image = cv2.imread (myFile)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = np.asarray(image, dtype="int32")
     predict[i] = image
-
+    
+# store the gold standard images
 files = glob.glob ("you_path_stored_the_gold_standards")
 
+# average scores for one of the validation metrics
 acc = []
 for i in range(len(files)):
     #img = predict[i].reshape(256,256)
