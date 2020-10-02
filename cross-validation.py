@@ -2,59 +2,23 @@ import numpy as np
 import os
 import tensorflow as tf
 import skimage.io as io
-import skimage.transform as trans
-import numpy as np
 from keras.models import *
 from keras.layers import *
 from keras.optimizers import *
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras import backend as Keras
-import h5py
 import pandas
 import cv2
 import glob
 from PIL import Image,ImageFilter,ImageDraw,ImageEnhance, ImageChops 
-from sklearn.model_selection import cross_val_score
 from numpy.random import seed
 from model_3 import *
 from data_1 import *
-
 import sklearn
-from sklearn.model_selection import cross_val_score, GridSearchCV, RandomizedSearchCV, KFold
 from keras.wrappers.scikit_learn import KerasClassifier
 from keras.callbacks import History
-from matplotlib import pyplot as plt
-from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
-from sklearn.metrics import roc_auc_score
 import sys
-from nested_cv import NestedCV
 from sklearn.model_selection import KFold, StratifiedKFold
-from sklearn.model_selection import cross_val_score
-
-
-# training data
-#files = glob.glob ("data/membrane/train/test1/*.tif") 
-#x_train = np.ndarray((len(files),128,128,3), dtype=np.uint8)
-
-#files.sort(key=lambda x: int(x.split('/')[4][:-4]))
-#print(files)
-#for i,myFile in enumerate (files):
-#    image = cv2.imread (myFile,cv2.IMREAD_COLOR)
-#    image = np.asarray(image, dtype="int32" )
-#    norm = (image - np.min(image)) / (np.max(image) - np.min(image))
-#    x_train[i] = norm
-
-# training mask data
-#files = glob.glob ("data/membrane/train/test2/*.tif")
-#y_train = np.ndarray((len(files),128,128,1), dtype=np.uint8)
-#files.sort(key=lambda x: int(x.split('/')[4][:-4]))
-#for i,myFile in enumerate (files):
-#    image = cv2.imread (myFile)
-#    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-#    image = np.asarray(image, dtype="int32" )
-#    image = image.reshape(image.shape+(1,))
-#    norm = image/255
-#    y_train[i] = norm
 
 
 # read image data as array
