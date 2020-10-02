@@ -2,8 +2,6 @@ import numpy as np
 import os
 import tensorflow as tf
 import skimage.io as io
-import skimage.transform as trans
-import numpy as np
 from keras.models import *
 from keras.layers import *
 from keras.optimizers import *
@@ -14,22 +12,17 @@ import pandas
 import cv2
 import glob
 from PIL import Image,ImageFilter,ImageDraw,ImageEnhance, ImageChops
-from sklearn.model_selection import cross_val_score
 from numpy.random import seed
 from model_3 import *
 from data_1 import *
-
 import sklearn
-from sklearn.model_selection import cross_val_score, GridSearchCV, RandomizedSearchCV, KFold
 from keras.wrappers.scikit_learn import KerasClassifier
 from keras.callbacks import History
 from matplotlib import pyplot as plt
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
-from sklearn.metrics import roc_auc_score
 import sys
-from nested_cv import NestedCV
 from sklearn.model_selection import KFold, StratifiedKFold
-from sklearn.model_selection import cross_val_score
+
 
 # K-fold Cross Validation model evaluation
 num_folds = 5
